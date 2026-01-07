@@ -1,0 +1,47 @@
+from pydantic_settings import BaseSettings
+from typing import List, Optional
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+class Settings(BaseSettings):
+    # Application
+    APP_NAME: str = "JobHawk"
+    DEBUG: bool = os.getenv("DEBUG", "False").lower() == "true"
+    
+    # Database
+    DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./jobhawk.db")
+    
+    # Security
+    SECRET_KEY: str = os.getenv("SECRET_KEY", "change-this-in-production")
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    
+    # CORS
+    CORS_ORIGINS: List[str] = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:8000",
+    ]
+    
+    # Redis
+    REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+    
+    # Celery
+    CELERY_BROKER_URL: str = os.getenv("CELERY_BROKER_URL", "redis://localhost:6379/0")
+    CELERY_RESULT_BACKEND: str = os.getenv("CELERY_RESULT_BACKEND", "redis://localhost:6379/0")
+    
+    # File uploads
+    UPLOAD_FOLDER: str = "./uploads"
+    MAX_UPLOAD_SIZE: int = 10 * 1024 * 1024  # 10MB
+    ALLOWED_EXTENSIONS: List[str] = [".pdf", ".docx", ".doc", ".txt"]
+    
+    # Scraping
+    REQUEST_DELAY: int = 5  # seconds between requests
+    USER_AGENT: str = "JobHawkBot/1.0 (+https://jobhawk.example.com)"
+    
+    class Config:
+        env_file = ".env"
+
+settings = Settings()
