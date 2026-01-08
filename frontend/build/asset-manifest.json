@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/JobHawk/static/css/main.eeca6c28.css",
+    "main.js": "/JobHawk/static/js/main.49a31131.js",
+    "index.html": "/JobHawk/index.html",
+    "main.eeca6c28.css.map": "/JobHawk/static/css/main.eeca6c28.css.map",
+    "main.49a31131.js.map": "/JobHawk/static/js/main.49a31131.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eeca6c28.css",
+    "static/js/main.49a31131.js"
+  ]
+}

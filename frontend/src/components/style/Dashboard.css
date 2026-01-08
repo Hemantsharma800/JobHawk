@@ -1,0 +1,270 @@
+.dashboard {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 8px;
+}
+
+.dashboard-header .subtitle {
+    color: #718096;
+    font-size: 16px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.stat-icon.total {
+    background: rgba(67, 97, 238, 0.1);
+    color: #4361ee;
+}
+
+.stat-icon.applied {
+    background: rgba(76, 201, 240, 0.1);
+    color: #4cc9f0;
+}
+
+.stat-icon.interview {
+    background: rgba(248, 150, 30, 0.1);
+    color: #f8961e;
+}
+
+.stat-icon.success {
+    background: rgba(56, 176, 0, 0.1);
+    color: #38b000;
+}
+
+.stat-content h3 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 4px 0;
+}
+
+.stat-content p {
+    color: #718096;
+    margin: 0 0 8px 0;
+    font-size: 14px;
+}
+
+.stat-trend {
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stat-trend.positive {
+    color: #38b000;
+}
+
+.stat-trend.negative {
+    color: #f94144;
+}
+
+.dashboard-content {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+}
+
+.recent-jobs-section {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.section-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
+}
+
+.view-all {
+    color: #4361ee;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.view-all:hover {
+    color: #3a56d4;
+}
+
+.jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.quick-actions {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.quick-actions h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0 0 20px 0;
+}
+
+.action-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 12px;
+    transition: all 0.2s;
+}
+
+.action-btn.primary {
+    background: #4361ee;
+    color: white;
+}
+
+.action-btn.primary:hover {
+    background: #3a56d4;
+    transform: translateY(-1px);
+}
+
+.action-btn.secondary {
+    background: #f7fafc;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+}
+
+.action-btn.secondary:hover {
+    background: #edf2f7;
+    border-color: #cbd5e0;
+}
+
+.upcoming-interviews {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.upcoming-interviews h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0 0 20px 0;
+}
+
+.interview-item {
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+}
+
+.interview-item:hover {
+    border-color: #cbd5e0;
+}
+
+.interview-time {
+    font-size: 12px;
+    color: #718096;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.interview-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.interview-details strong {
+    color: #2d3748;
+    font-size: 14px;
+}
+
+.interview-details span {
+    color: #718096;
+    font-size: 13px;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-content {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard {
+        padding: 20px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
