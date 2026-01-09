@@ -1,93 +1,114 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-import Sidebar from './components/Sidebar';
-import Header from './components/Header';
+import React from 'react';
+import { HashRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Dashboard from './pages/Dashboard';
 import Jobs from './pages/Jobs';
 import Portals from './pages/Portals';
+import Analytics from './pages/Analytics';
+import Profile from './pages/Profile';
+import Settings from './pages/Settings';
+import Help from './pages/Help';
 import './App.css';
 
-// Mock user data
-const mockUser = {
-  id: '1',
-  name: 'John Doe',
-  email: 'john@example.com',
-  avatar: null,
+// Protected Route component
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated, loading } = useAuth();
+  
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+  
+  return children;
 };
 
-function App() {
-  const [activeTab, setActiveTab] = useState('dashboard');
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [user] = useState(mockUser);
-
-  const handleLogout = () => {
-    console.log('Logging out...');
-    // Implement logout logic
-  };
-
-  const handleNotificationsClick = () => {
-    console.log('Notifications clicked');
-    // Implement notifications logic
-  };
-
+function AppContent() {
+  const { user, logout } = useAuth();
+  
   return (
-    <Router>
-      <div className="app">
-        <Sidebar
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
-          collapsed={sidebarCollapsed}
-          onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
-        />
-
-        <div className={`main-content ${sidebarCollapsed ? 'collapsed' : ''}`}>
-          <Header
-            user={user}
-            onLogout={handleLogout}
-            onNotificationsClick={handleNotificationsClick}
-          />
-
-          <main className="content">
-            <Routes>
-              <Route path="/" element={<Navigate to="/dashboard" />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/jobs" element={<Jobs />} />
-              <Route path="/portals" element={<Portals />} />
-              <Route path="/analytics" element={<div>Analytics Page</div>} />
-              <Route path="/profile" element={<div>Profile Page</div>} />
-              <Route path="/settings" element={<div>Settings Page</div>} />
-              <Route path="*" element={<div>404 - Page Not Found</div>} />
-            </Routes>
-          </main>
+    <div className="app-container">
+      {/* Sidebar Navigation */}
+      <nav className="sidebar">
+        <div className="logo">
+          <h2>JobPortal</h2>
         </div>
+        <ul className="nav-menu">
+          <li><Link to="/"><span>📊</span> Dashboard</Link></li>
+          <li><Link to="/jobs"><span>💼</span> Jobs</Link></li>
+          <li><Link to="/portals"><span>🌐</span> Portals</Link></li>
+          <li><Link to="/analytics"><span>📈</span> Analytics</Link></li>
+          <li><Link to="/profile"><span>👤</span> Profile</Link></li>
+          <li><Link to="/settings"><span>⚙️</span> Settings</Link></li>
+          <li><Link to="/help"><span>❓</span> Help</Link></li>
+        </ul>
+        
+        {user && (
+          <div className="user-profile-sidebar">
+            <div className="sidebar-user-info">
+              <div className="sidebar-avatar">
+                {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
+              </div>
+              <div className="sidebar-user-details">
+                <h4>{user.name || 'User'}</h4>
+                <p>{user.email || ''}</p>
+              </div>
+            </div>
+            <button className="sidebar-logout-btn" onClick={logout}>
+              Logout
+            </button>
+          </div>
+        )}
+      </nav>
 
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 4000,
-            style: {
-              background: '#363636',
-              color: '#fff',
-            },
-            success: {
-              duration: 3000,
-              iconTheme: {
-                primary: '#38b000',
-                secondary: '#fff',
-              },
-            },
-            error: {
-              duration: 4000,
-              iconTheme: {
-                primary: '#f94144',
-                secondary: '#fff',
-              },
-            },
-          }}
-        />
-      </div>
-    </Router>
+      {/* Main Content */}
+      <main className="main-content">
+        <header className="header">
+          <div className="search-bar">
+            <input type="text" placeholder="Search jobs..." />
+            <button>Search</button>
+          </div>
+          <div className="user-info">
+            {user ? (
+              <div className="user-profile">
+                <span>Welcome, {user.name || 'User'}!</span>
+                <button className="logout-btn" onClick={logout}>
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <button className="login-btn">
+                Sign in with Google
+              </button>
+            )}
+          </div>
+        </header>
+
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/jobs" element={<Jobs />} />
+            <Route path="/portals" element={<Portals />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/help" element={<Help />} />
+          </Routes>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </AuthProvider>
   );
 }
 

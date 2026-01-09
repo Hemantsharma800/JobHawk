@@ -1,0 +1,62 @@
+.portals {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.portals h1 {
+  color: #1f2937;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.portals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.portal-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border: 1px solid #e5e7eb;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.portal-card:hover {
+  transform: translateY(-5px);
+}
+
+.portal-card h3 {
+  color: #1f2937;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.portal-card p {
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.connect-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.connect-btn:hover {
+  background: #0da271;
+}

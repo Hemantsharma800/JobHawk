@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+nav {
+  width: 250px;
+  background: #2563eb;
+  color: white;
+  padding: 20px;
+}
+
+nav h2 {
+  margin-bottom: 30px;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav li {
+  margin-bottom: 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+main {
+  flex: 1;
+  padding: 30px;
+  background: #f5f7fa;
+}

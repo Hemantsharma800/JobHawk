@@ -1,205 +1,130 @@
-import React, { useState, useEffect } from 'react';
-import {
-    FaBriefcase,
-    FaCheckCircle,
-    FaComments,
-    FaChartBar,
-    FaArrowUp,
-    FaArrowDown
-} from 'react-icons/fa';
-import JobCard from '../components/JobCard';
+import React from 'react';
 import './styles/dashboard.css';
 
-const Dashboard = () => {
-    const [stats, setStats] = useState({
-        totalJobs: 24,
-        applied: 12,
-        interviews: 6,
-        offers: 2,
-        successRate: 8.3
-    });
-
-    const [recentJobs, setRecentJobs] = useState([
-        {
-            id: '1',
-            title: 'Senior React Developer',
-            company: 'TechCorp Inc.',
-            location: 'Remote',
-            date: '2024-01-15',
-            salary: '$120,000 - $150,000',
-            description: 'Looking for an experienced React developer...',
-            status: 'applied',
-            tags: ['React', 'TypeScript', 'Redux'],
-            url: '#',
-            saved: true
-        },
-        {
-            id: '2',
-            title: 'Full Stack Engineer',
-            company: 'StartupXYZ',
-            location: 'San Francisco, CA',
-            date: '2024-01-14',
-            salary: '$130,000 - $160,000',
-            description: 'Join our fast-growing startup team...',
-            status: 'interview',
-            tags: ['Node.js', 'React', 'AWS'],
-            url: '#',
-            saved: false
-        },
-        {
-            id: '3',
-            title: 'Frontend Lead',
-            company: 'DesignStudio',
-            location: 'New York, NY',
-            date: '2024-01-13',
-            salary: '$140,000 - $170,000',
-            description: 'Lead our frontend development team...',
-            status: 'saved',
-            tags: ['React', 'Team Lead', 'UI/UX'],
-            url: '#',
-            saved: true
-        }
-    ]);
-
-    const handleApply = (jobId) => {
-        console.log('Applying to job:', jobId);
-        // API call would go here
-    };
-
-    const handleSave = (jobId) => {
-        setRecentJobs(jobs =>
-            jobs.map(job =>
-                job.id === jobId ? { ...job, saved: !job.saved } : job
-            )
-        );
-    };
-
-    const handleShare = (job) => {
-        navigator.clipboard.writeText(job.url || window.location.href);
-        alert('Job link copied to clipboard!');
-    };
-
-    const handleViewDetails = (jobId) => {
-        console.log('Viewing details for job:', jobId);
-        // Navigate to job details page
-    };
-
-    return (
-        <div className="dashboard">
-            <div className="dashboard-header">
-                <h1>Dashboard</h1>
-                <p className="subtitle">Welcome back! Here's your job search overview.</p>
-            </div>
-
-            <div className="stats-grid">
-                <div className="stat-card">
-                    <div className="stat-icon total">
-                        <FaBriefcase />
-                    </div>
-                    <div className="stat-content">
-                        <h3>{stats.totalJobs}</h3>
-                        <p>Total Jobs</p>
-                        <span className="stat-trend positive">
-                            <FaArrowUp /> 12%
-                        </span>
-                    </div>
-                </div>
-
-                <div className="stat-card">
-                    <div className="stat-icon applied">
-                        <FaCheckCircle />
-                    </div>
-                    <div className="stat-content">
-                        <h3>{stats.applied}</h3>
-                        <p>Applied</p>
-                        <span className="stat-trend positive">
-                            <FaArrowUp /> 8%
-                        </span>
-                    </div>
-                </div>
-
-                <div className="stat-card">
-                    <div className="stat-icon interview">
-                        <FaComments />
-                    </div>
-                    <div className="stat-content">
-                        <h3>{stats.interviews}</h3>
-                        <p>Interviews</p>
-                        <span className="stat-trend negative">
-                            <FaArrowDown /> 5%
-                        </span>
-                    </div>
-                </div>
-
-                <div className="stat-card">
-                    <div className="stat-icon success">
-                        <FaChartBar />
-                    </div>
-                    <div className="stat-content">
-                        <h3>{stats.successRate}%</h3>
-                        <p>Success Rate</p>
-                        <span className="stat-trend positive">
-                            <FaArrowUp /> 3%
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div className="dashboard-content">
-                <div className="recent-jobs-section">
-                    <div className="section-header">
-                        <h2>Recent Job Applications</h2>
-                        <a href="/jobs" className="view-all">View All →</a>
-                    </div>
-                    <div className="jobs-list">
-                        {recentJobs.map(job => (
-                            <JobCard
-                                key={job.id}
-                                job={job}
-                                onApply={handleApply}
-                                onSave={handleSave}
-                                onShare={handleShare}
-                                onViewDetails={handleViewDetails}
-                            />
-                        ))}
-                    </div>
-                </div>
-
-                <div className="right-sidebar">
-                    <div className="quick-actions">
-                        <h3>Quick Actions</h3>
-                        <button className="action-btn primary">
-                            + Add New Job
-                        </button>
-                        <button className="action-btn secondary">
-                            Connect Portal
-                        </button>
-                        <button className="action-btn secondary">
-                            Generate Report
-                        </button>
-                    </div>
-
-                    <div className="upcoming-interviews">
-                        <h3>Upcoming Interviews</h3>
-                        <div className="interview-item">
-                            <div className="interview-time">Today, 2:00 PM</div>
-                            <div className="interview-details">
-                                <strong>TechCorp - React Interview</strong>
-                                <span>Video Call</span>
-                            </div>
-                        </div>
-                        <div className="interview-item">
-                            <div className="interview-time">Tomorrow, 10:00 AM</div>
-                            <div className="interview-details">
-                                <strong>StartupXYZ - Technical Round</strong>
-                                <span>On-site</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+function Dashboard() {
+  return (
+    <div className="dashboard">
+      <h1>Dashboard</h1>
+      <p className="welcome-text">Welcome back! Here's your job search overview.</p>
+      
+      <div className="stats-container">
+        <div className="stat-card">
+          <div className="stat-icon">📈</div>
+          <h2>24</h2>
+          <p>Total Jobs</p>
+          <span className="trend up">12% ↗</span>
         </div>
-    );
-};
+        
+        <div className="stat-card">
+          <div className="stat-icon">📝</div>
+          <h2>12</h2>
+          <p>Applied</p>
+          <span className="trend up">8% ↗</span>
+        </div>
+        
+        <div className="stat-card">
+          <div className="stat-icon">🤝</div>
+          <h2>6</h2>
+          <p>Interviews</p>
+          <span className="trend up">5% ↗</span>
+        </div>
+        
+        <div className="stat-card">
+          <div className="stat-icon">🎯</div>
+          <h2>8.3%</h2>
+          <p>Success Rate</p>
+          <span className="trend up">3% ↗</span>
+        </div>
+      </div>
+      
+      <div className="dashboard-sections">
+        <div className="recent-jobs">
+          <div className="section-header">
+            <h2>Recent Job Applications</h2>
+            <button className="view-all-btn">View All →</button>
+          </div>
+          
+          <div className="job-card">
+            <div className="job-header">
+              <h3>Senior React Developer</h3>
+              <span className="job-badge">New</span>
+            </div>
+            <div className="job-details">
+              <span className="company">TechCorp Inc.</span>
+              <span className="separator">•</span>
+              <span className="location">Remote</span>
+              <span className="separator">•</span>
+              <span className="date">15/01/2024</span>
+              <span className="separator">•</span>
+              <span className="salary">$120,000 - $150,000</span>
+            </div>
+            <p className="job-description">Looking for an experienced React developer with 5+ years in frontend development. Must have experience with TypeScript, Redux, and modern web technologies.</p>
+            <div className="tags">
+              <span className="tag">React</span>
+              <span className="tag">TypeScript</span>
+              <span className="tag">Redux</span>
+              <span className="tag">Node.js</span>
+            </div>
+            <div className="job-actions">
+              <button className="apply-btn">Apply Now</button>
+              <button className="save-btn">Save</button>
+            </div>
+          </div>
+          
+          <div className="job-card">
+            <div className="job-header">
+              <h3>Full Stack Developer</h3>
+              <span className="job-badge interview">Interview</span>
+            </div>
+            <div className="job-details">
+              <span className="company">StartUpXYZ</span>
+              <span className="separator">•</span>
+              <span className="location">Hybrid</span>
+              <span className="separator">•</span>
+              <span className="date">10/01/2024</span>
+              <span className="separator">•</span>
+              <span className="salary">$90,000 - $110,000</span>
+            </div>
+            <p className="job-description">Looking for a Full Stack Developer proficient in JavaScript, Python, and cloud technologies. Fast-paced startup environment.</p>
+            <div className="tags">
+              <span className="tag">JavaScript</span>
+              <span className="tag">Python</span>
+              <span className="tag">AWS</span>
+              <span className="tag">MongoDB</span>
+            </div>
+            <div className="job-actions">
+              <button className="view-btn">View Details</button>
+              <button className="status-btn">Interview Scheduled</button>
+            </div>
+          </div>
+        </div>
+        
+        <div className="quick-actions">
+          <h2>Quick Actions</h2>
+          <div className="action-cards">
+            <div className="action-card">
+              <span className="action-icon">➕</span>
+              <h3>Add New Job</h3>
+              <p>Track a new job application</p>
+              <button className="action-btn">Add</button>
+            </div>
+            <div className="action-card">
+              <span className="action-icon">📊</span>
+              <h3>Generate Report</h3>
+              <p>Create analytics report</p>
+              <button className="action-btn">Generate</button>
+            </div>
+            <div className="action-card">
+              <span className="action-icon">🔔</span>
+              <h3>Set Reminder</h3>
+              <p>Set follow-up reminders</p>
+              <button className="action-btn">Set</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default Dashboard;
