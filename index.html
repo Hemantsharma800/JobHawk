@@ -1,14 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glixtron</title>
     <style>
-        body { font-family: Arial; text-align: center; padding: 50px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .status {
+            background: #f0f7ff;
+            border: 2px solid #4dabf7;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 25px 0;
+            font-size: 1.1rem;
+            color: #1864ab;
+        }
+        
+        .status::before {
+            content: "✅ ";
+        }
+        
+        .url-box {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 1.1rem;
+            word-break: break-all;
+        }
+        
+        .deploy-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 25px;
+            font-size: 0.95rem;
+            color: #856404;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #40c057;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 10px 5px;
+        }
     </style>
 </head>
 <body>
-    <h1>🚀 Glixtron is Live!</h1>
-    <p>Your GitHub Pages site is successfully deployed.</p>
-    <p>Start building your project here!</p>
+    <div class="container">
+        <h1>🚀 Glixtron</h1>
+        
+        <div class="status">GitHub Pages Successfully Deployed!</div>
+        
+        <p>Your static website is now live and accessible at:</p>
+        
+        <div class="url-box" id="urlDisplay">
+            https://hemantsharma800.github.io/Glixtron/
+        </div>
+        
+        <div>
+            <span class="badge">GitHub Pages</span>
+            <span class="badge">Static Site</span>
+            <span class="badge">Auto Deploy</span>
+        </div>
+        
+        <div class="deploy-info">
+            <strong>Next Steps:</strong> Edit this index.html file or add more HTML/CSS/JS files to customize your site.
+            Changes pushed to the main branch will automatically deploy.
+        </div>
+    </div>
+    
+    <script>
+        // Auto-update the displayed URL
+        document.getElementById('urlDisplay').textContent = window.location.origin + window.location.pathname;
+        
+        // Add last deployed time
+        const timeDiv = document.createElement('div');
+        timeDiv.style.marginTop = '20px';
+        timeDiv.style.color = '#666';
+        timeDiv.style.fontSize = '0.9rem';
+        timeDiv.innerHTML = `Last deployed: ${new Date().toLocaleString()}`;
+        document.querySelector('.container').appendChild(timeDiv);
+    </script>
 </body>
 </html>
