@@ -1,0 +1,24 @@
+{
+  "name": "Glixtron",
+  "version": "1.0.0",
+  "description": "An automated job aggregator that collects job listings, matches them with your resume, and helps you track applications.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hemantsharma800/Glixtron.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/hemantsharma800/Glixtron/issues"
+  },
+  "homepage": "https://github.com/hemantsharma800/Glixtron#readme"
+}

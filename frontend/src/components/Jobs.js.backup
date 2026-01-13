@@ -1,0 +1,152 @@
+import React, { useState } from 'react';
+import {
+  Container,
+  Typography,
+  Box,
+  Tabs,
+  Tab,
+  Paper
+} from '@mui/material';
+import AIJobAnalysis from './AIJobAnalysis';
+
+// Sample resume data structure
+const sampleResumeData = {
+  name: "John Doe",
+  email: "john@example.com",
+  phone: "+1-234-567-8900",
+  summary: "Experienced software developer with 5+ years in web development...",
+  experience: [
+    {
+      title: "Senior Developer",
+      company: "Tech Corp",
+      duration: "2020-2023",
+      description: "Led team of 5 developers, implemented microservices..."
+    }
+  ],
+  skills: ["JavaScript", "React", "Node.js", "AWS"],
+  education: [
+    {
+      degree: "B.S. Computer Science",
+      university: "State University",
+      year: "2018"
+    }
+  ]
+};
+
+function Jobs() {
+  const [tabValue, setTabValue] = useState(0);
+  const [jobDescription, setJobDescription] = useState('');
+
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
+
+  return (
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Typography variant="h4" gutterBottom fontWeight="bold">
+        AI-Powered Job Analysis
+      </Typography>
+      
+      <Typography variant="body1" color="text.secondary" paragraph>
+        Upload your resume and let our AI analyze it, generate tailored versions for specific jobs,
+        and get personalized career recommendations.
+      </Typography>
+      
+      <Paper sx={{ width: '100%', mb: 3 }}>
+        <Tabs
+          value={tabValue}
+          onChange={handleTabChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="fullWidth"
+        >
+          <Tab label="Resume Analysis" />
+          <Tab label="Job Matching" />
+          <Tab label="Resume Generator" />
+          <Tab label="Career Guidance" />
+        </Tabs>
+      </Paper>
+      
+      <Box sx={{ mt: 3 }}>
+        {tabValue === 0 && (
+          <AIJobAnalysis 
+            resumeData={sampleResumeData}
+            jobDescription={jobDescription}
+          />
+        )}
+        
+        {tabValue === 1 && (
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              Paste Job Description for Analysis
+            </Typography>
+            <textarea
+              style={{
+                width: '100%',
+                height: '200px',
+                padding: '12px',
+                border: '1px solid #ddd',
+                borderRadius: '4px',
+                fontFamily: 'inherit',
+                fontSize: '14px'
+              }}
+              placeholder="Paste job description here to analyze match with your resume..."
+              value={jobDescription}
+              onChange={(e) => setJobDescription(e.target.value)}
+            />
+            <Box sx={{ mt: 2 }}>
+              <AIJobAnalysis 
+                resumeData={sampleResumeData}
+                jobDescription={jobDescription}
+              />
+            </Box>
+          </Box>
+        )}
+        
+        {tabValue === 2 && (
+          <Box>
+            <Typography variant="body1" paragraph>
+              Generate a tailored resume for any job description. The AI will rewrite your resume
+              to highlight relevant skills and experience.
+            </Typography>
+            <AIJobAnalysis 
+              resumeData={sampleResumeData}
+              jobDescription={jobDescription}
+            />
+          </Box>
+        )}
+        
+        {tabValue === 3 && (
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              Career Path Recommendations
+            </Typography>
+            <Typography variant="body1" paragraph>
+              Based on your skills and experience, our AI suggests career paths,
+              skills to learn, and industries to explore.
+            </Typography>
+            <AIJobAnalysis 
+              resumeData={sampleResumeData}
+            />
+          </Box>
+        )}
+      </Box>
+      
+      <Paper sx={{ p: 3, mt: 4, bgcolor: 'primary.light', color: 'primary.contrastText' }}>
+        <Typography variant="h6" gutterBottom>
+          💡 AI Features Included:
+        </Typography>
+        <ul>
+          <li><Typography variant="body2">Natural Language Processing for deep resume analysis</Typography></li>
+          <li><Typography variant="body2">Job Description matching with score</Typography></li>
+          <li><Typography variant="body2">AI-generated tailored resumes</Typography></li>
+          <li><Typography variant="body2">Personalized career change recommendations</Typography></li>
+          <li><Typography variant="body2">Skills gap analysis</Typography></li>
+          <li><Typography variant="body2">Market demand insights</Typography></li>
+        </ul>
+      </Paper>
+    </Container>
+  );
+}
+
+export default Jobs;

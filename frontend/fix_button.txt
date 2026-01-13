@@ -1,0 +1,7 @@
+        <button
+          className={`portal-btn \${connectedPortals[portal.id] ? 'connected' : ''} \${activePortal === portal.id ? 'active-portal' : ''}`}
+          onClick={() => handlePortalConnect(portal.id)}
+          style={{ "--portal-color": portal.color }}
+        >
+          {portal.name}
+        </button>

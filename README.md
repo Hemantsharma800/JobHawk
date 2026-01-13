@@ -1,4 +1,4 @@
-# JobHawk - Intelligent Job Application Tracker
+# Glixtron - Intelligent Job Application Tracker
 
 An automated job aggregator that collects job listings, matches them with your resume, and helps you track applications.
 
@@ -12,8 +12,8 @@ An automated job aggregator that collects job listings, matches them with your r
 
 ```bash
 # Clone the repository
-git clone https://github.com/hemantsharma800/jobhawk.git
-cd jobhawk
+git clone https://github.com/hemantsharma800/Glixtron.git
+cd Glixtron
 
 # Start with Docker (recommended)
 docker-compose up -d

@@ -1,0 +1,400 @@
+.applications-container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.applications-header {
+  margin-bottom: 40px;
+}
+
+.applications-header h1 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 36px;
+}
+
+.applications-header p {
+  margin: 10px 0 0 0;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.applications-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.applications-stats .stat-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.applications-stats .stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.applications-stats .stat-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 32px;
+  color: #3b82f6;
+}
+
+.applications-stats .stat-card p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.applications-controls {
+  margin-bottom: 30px;
+  padding: 25px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0 15px;
+  margin-bottom: 20px;
+}
+
+.search-box svg {
+  color: #9ca3af;
+  font-size: 20px;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 15px 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-btn {
+  padding: 10px 20px;
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  background: #e5e7eb;
+}
+
+.filter-btn.active {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.applications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.application-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 30px;
+  transition: all 0.3s;
+}
+
+.application-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  border-color: #3b82f6;
+}
+
+.application-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.application-info h3 {
+  margin: 0 0 10px 0;
+  color: #1f2937;
+  font-size: 22px;
+}
+
+.company {
+  margin: 0 0 15px 0;
+  color: #3b82f6;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.application-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.salary {
+  font-weight: 600;
+  color: #059669;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.application-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.status-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.application-timeline {
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.application-timeline h4 {
+  margin: 0 0 20px 0;
+  color: #1f2937;
+  font-size: 16px;
+}
+
+.timeline-steps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.timeline-steps::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: #e5e7eb;
+  z-index: 1;
+}
+
+.timeline-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+
+.step-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.step-circle.completed {
+  background: #10b981;
+  border-color: #10b981;
+  color: white;
+}
+
+.step-number {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.step-info {
+  text-align: center;
+}
+
+.step-name {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.step-date {
+  display: block;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.application-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.next-step {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.next-step strong {
+  color: #374151;
+}
+
+.application-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.view-btn,
+.message-btn,
+.calendar-btn,
+.withdraw-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.view-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.view-btn:hover {
+  background: #e5e7eb;
+}
+
+.message-btn {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #dbeafe;
+}
+
+.message-btn:hover {
+  background: #dbeafe;
+}
+
+.calendar-btn {
+  background: #f0fdf4;
+  color: #065f46;
+  border: 1px solid #bbf7d0;
+}
+
+.calendar-btn:hover {
+  background: #dcfce7;
+}
+
+.withdraw-btn {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.withdraw-btn:hover {
+  background: #fee2e2;
+}
+
+.no-applications {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  color: #6b7280;
+}
+
+.no-applications h3 {
+  margin: 0 0 10px 0;
+  color: #1f2937;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .applications-container {
+    padding: 15px;
+  }
+  
+  .application-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .application-status {
+    align-items: flex-start;
+  }
+  
+  .application-footer {
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+  }
+  
+  .application-actions {
+    flex-wrap: wrap;
+  }
+  
+  .application-actions button {
+    flex: 1;
+    min-width: 120px;
+  }
+  
+  .timeline-steps {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .timeline-step {
+    flex: 0 0 calc(50% - 10px);
+  }
+}

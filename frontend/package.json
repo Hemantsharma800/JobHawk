@@ -1,27 +1,42 @@
 {
-  "name": "jobhawk",
-  "version": "0.1.0",
+  "name": "glixtron",
+  "version": "1.0.0",
   "private": true,
-  "homepage": "https://hemantsharma800.github.io/JobHawk",
   "dependencies": {
+    "@craco/craco": "^7.1.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@google/generative-ai": "^0.1.3",
+    "@mui/icons-material": "^7.3.7",
+    "@mui/material": "^7.3.7",
     "axios": "^1.13.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-router-dom": "6.20.0",
+    "cookie": "^1.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "langchain": "^1.2.8",
+    "multer": "^2.0.2",
+    "openai": "^6.16.0",
+    "pdf-parse": "^2.4.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.12.0",
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "craco start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "craco test",
     "eject": "react-scripts eject",
+    "backend": "node backend/server.js",
+    "dev": "concurrently \\\"npm start\\\" \\\"npm run backend\\\"",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
@@ -37,6 +52,12 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "6.1.0"
-  }
+    "@types/node": "^25.0.8",
+    "concurrently": "^9.2.1",
+    "eslint": "^8.57.1",
+    "gh-pages": "^6.3.0",
+    "source-map-loader": "^5.0.0"
+  },
+  "homepage": "https://[your-github-username].github.io/glixtron",
+  "description": "AI-Powered Career Platform by Glixtron"
 }

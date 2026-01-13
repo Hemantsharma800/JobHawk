@@ -1,114 +1,68 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-import Dashboard from './pages/Dashboard';
-import Jobs from './pages/Jobs';
-import Portals from './pages/Portals';
-import Analytics from './pages/Analytics';
-import Profile from './pages/Profile';
-import Settings from './pages/Settings';
-import Help from './pages/Help';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Box } from '@mui/material';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './components/Home';
+import Login from './components/Login';
+import DashboardLayout from './components/DashboardLayout';
+import Dashboard from './components/Dashboard';
+import Jobs from './components/Jobs';
+import AIJobAnalysis from './components/AIJobAnalysis';
+import SavedJobs from './components/SavedJobs';
+import Applications from './components/Applications';
+import CareerInsights from './components/CareerInsights';
+import Profile from './components/Profile';
+import Network from './components/Network';
+import Messages from './components/Messages';
+import Settings from './components/Settings';
 
-// Protected Route component
-const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, loading } = useAuth();
-  
-  if (loading) {
-    return <div className="loading">Loading...</div>;
-  }
-  
-  if (!isAuthenticated) {
-    return <Navigate to="/" />;
-  }
-  
-  return children;
-};
-
-function AppContent() {
-  const { user, logout } = useAuth();
-  
-  return (
-    <div className="app-container">
-      {/* Sidebar Navigation */}
-      <nav className="sidebar">
-        <div className="logo">
-          <h2>JobPortal</h2>
-        </div>
-        <ul className="nav-menu">
-          <li><Link to="/"><span>📊</span> Dashboard</Link></li>
-          <li><Link to="/jobs"><span>💼</span> Jobs</Link></li>
-          <li><Link to="/portals"><span>🌐</span> Portals</Link></li>
-          <li><Link to="/analytics"><span>📈</span> Analytics</Link></li>
-          <li><Link to="/profile"><span>👤</span> Profile</Link></li>
-          <li><Link to="/settings"><span>⚙️</span> Settings</Link></li>
-          <li><Link to="/help"><span>❓</span> Help</Link></li>
-        </ul>
-        
-        {user && (
-          <div className="user-profile-sidebar">
-            <div className="sidebar-user-info">
-              <div className="sidebar-avatar">
-                {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
-              </div>
-              <div className="sidebar-user-details">
-                <h4>{user.name || 'User'}</h4>
-                <p>{user.email || ''}</p>
-              </div>
-            </div>
-            <button className="sidebar-logout-btn" onClick={logout}>
-              Logout
-            </button>
-          </div>
-        )}
-      </nav>
-
-      {/* Main Content */}
-      <main className="main-content">
-        <header className="header">
-          <div className="search-bar">
-            <input type="text" placeholder="Search jobs..." />
-            <button>Search</button>
-          </div>
-          <div className="user-info">
-            {user ? (
-              <div className="user-profile">
-                <span>Welcome, {user.name || 'User'}!</span>
-                <button className="logout-btn" onClick={logout}>
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <button className="login-btn">
-                Sign in with Google
-              </button>
-            )}
-          </div>
-        </header>
-
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/jobs" element={<Jobs />} />
-            <Route path="/portals" element={<Portals />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/help" element={<Help />} />
-          </Routes>
-        </div>
-      </main>
-    </div>
-  );
-}
+// For demo, set to true to see dashboard
+const isAuthenticated = true;
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <AppContent />
-      </Router>
-    </AuthProvider>
+    <Router>
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={
+            <>
+              <Header />
+              <Home />
+              <Footer />
+            </>
+          } />
+          
+          <Route path="/login" element={
+            <>
+              <Header />
+              <Login />
+              <Footer />
+            </>
+          } />
+          
+          {/* Protected dashboard routes */}
+          <Route path="/dashboard" element={
+            isAuthenticated ? <DashboardLayout /> : <Navigate to="/login" />
+          }>
+            <Route index element={<Dashboard />} />
+            <Route path="jobs" element={<Jobs />} />
+            <Route path="ai-analysis" element={<AIJobAnalysis />} />
+            <Route path="saved-jobs" element={<SavedJobs />} />
+            <Route path="applications" element={<Applications />} />
+            <Route path="career-insights" element={<CareerInsights />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="network" element={<Network />} />
+            <Route path="messages" element={<Messages />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+          
+          {/* Redirect all other routes */}
+          <Route path="*" element={<Navigate to={isAuthenticated ? "/dashboard" : "/"} />} />
+        </Routes>
+      </Box>
+    </Router>
   );
 }
 

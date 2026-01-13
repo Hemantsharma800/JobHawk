@@ -1,4 +1,4 @@
-# JobHawk - Job Portal Dashboard
+# Glixtron - Job Portal Dashboard
 
 A modern job portal application dashboard built with React.
 

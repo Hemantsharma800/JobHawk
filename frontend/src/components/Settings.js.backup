@@ -1,0 +1,243 @@
+import React, { useState } from 'react';
+import { FiUser, FiBell, FiLock, FiGlobe, FiMoon, FiPalette, FiDownload } from 'react-icons/fi';
+import './Settings.css';
+
+const Settings = () => {
+  const [settings, setSettings] = useState({
+    profileVisibility: 'public',
+    emailNotifications: true,
+    pushNotifications: true,
+    twoFactorAuth: false,
+    darkMode: false,
+    autoSave: true,
+    language: 'en'
+  });
+
+  const handleSettingChange = (key, value) => {
+    setSettings(prev => ({ ...prev, [key]: value }));
+  };
+
+  const handleExportData = () => {
+    const data = {
+      settings,
+      exportedAt: new Date().toISOString()
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'careerconnect-settings.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <div className="settings-container">
+      <div className="settings-header">
+        <h1>Settings</h1>
+        <p>Manage your account preferences and privacy</p>
+      </div>
+
+      <div className="settings-grid">
+        {/* Profile Settings */}
+        <div className="settings-card">
+          <div className="settings-card-header">
+            <FiUser />
+            <h3>Profile Settings</h3>
+          </div>
+          <div className="settings-group">
+            <label>Profile Visibility</label>
+            <select 
+              value={settings.profileVisibility}
+              onChange={(e) => handleSettingChange('profileVisibility', e.target.value)}
+            >
+              <option value="public">Public</option>
+              <option value="connections">Connections Only</option>
+              <option value="private">Private</option>
+            </select>
+          </div>
+          <div className="settings-group">
+            <label>Show Profile to Recruiters</label>
+            <div className="toggle-switch">
+              <input
+                type="checkbox"
+                checked={settings.profileVisibility === 'public'}
+                onChange={(e) => handleSettingChange('profileVisibility', e.target.checked ? 'public' : 'private')}
+              />
+              <span className="slider"></span>
+            </div>
+          </div>
+        </div>
+
+        {/* Notification Settings */}
+        <div className="settings-card">
+          <div className="settings-card-header">
+            <FiBell />
+            <h3>Notifications</h3>
+          </div>
+          <div className="settings-group">
+            <label>Email Notifications</label>
+            <div className="toggle-switch">
+              <input
+                type="checkbox"
+                checked={settings.emailNotifications}
+                onChange={(e) => handleSettingChange('emailNotifications', e.target.checked)}
+              />
+              <span className="slider"></span>
+            </div>
+          </div>
+          <div className="settings-group">
+            <label>Push Notifications</label>
+            <div className="toggle-switch">
+              <input
+                type="checkbox"
+                checked={settings.pushNotifications}
+                onChange={(e) => handleSettingChange('pushNotifications', e.target.checked)}
+              />
+              <span className="slider"></span>
+            </div>
+          </div>
+          <div className="settings-group">
+            <label>Job Alert Frequency</label>
+            <select>
+              <option>Daily</option>
+              <option>Weekly</option>
+              <option>Instant</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Security Settings */}
+        <div className="settings-card">
+          <div className="settings-card-header">
+            <FiLock />
+            <h3>Security</h3>
+          </div>
+          <div className="settings-group">
+            <label>Two-Factor Authentication</label>
+            <div className="toggle-switch">
+              <input
+                type="checkbox"
+                checked={settings.twoFactorAuth}
+                onChange={(e) => handleSettingChange('twoFactorAuth', e.target.checked)}
+              />
+              <span className="slider"></span>
+            </div>
+          </div>
+          <div className="settings-group">
+            <label>Auto-logout after inactivity</label>
+            <select>
+              <option>15 minutes</option>
+              <option>30 minutes</option>
+              <option>1 hour</option>
+              <option>Never</option>
+            </select>
+          </div>
+          <button className="change-password-btn">Change Password</button>
+        </div>
+
+        {/* Appearance Settings */}
+        <div className="settings-card">
+          <div className="settings-card-header">
+            <FiPalette />
+            <h3>Appearance</h3>
+          </div>
+          <div className="settings-group">
+            <label>Dark Mode</label>
+            <div className="toggle-switch">
+              <input
+                type="checkbox"
+                checked={settings.darkMode}
+                onChange={(e) => handleSettingChange('darkMode', e.target.checked)}
+              />
+              <span className="slider"></span>
+            </div>
+          </div>
+          <div className="settings-group">
+            <label>Theme Color</label>
+            <div className="color-picker">
+              <button className="color-option" style={{background: '#3b82f6'}}></button>
+              <button className="color-option" style={{background: '#10b981'}}></button>
+              <button className="color-option" style={{background: '#8b5cf6'}}></button>
+              <button className="color-option" style={{background: '#f59e0b'}}></button>
+              <button className="color-option" style={{background: '#ef4444'}}></button>
+            </div>
+          </div>
+        </div>
+
+        {/* Privacy Settings */}
+        <div className="settings-card">
+          <div className="settings-card-header">
+            <FiGlobe />
+            <h3>Privacy</h3>
+          </div>
+          <div className="settings-group">
+            <label>Show Online Status</label>
+            <div className="toggle-switch">
+              <input type="checkbox" defaultChecked />
+              <span className="slider"></span>
+            </div>
+          </div>
+          <div className="settings-group">
+            <label>Allow Search Engines to index profile</label>
+            <div className="toggle-switch">
+              <input type="checkbox" />
+              <span className="slider"></span>
+            </div>
+          </div>
+          <div className="settings-group">
+            <label>Data Sharing with Partners</label>
+            <div className="toggle-switch">
+              <input type="checkbox" />
+              <span className="slider"></span>
+            </div>
+          </div>
+        </div>
+
+        {/* Account Management */}
+        <div className="settings-card">
+          <div className="settings-card-header">
+            <FiDownload />
+            <h3>Account</h3>
+          </div>
+          <div className="settings-group">
+            <label>Language</label>
+            <select 
+              value={settings.language}
+              onChange={(e) => handleSettingChange('language', e.target.value)}
+            >
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+            </select>
+          </div>
+          <div className="settings-group">
+            <label>Auto-save Drafts</label>
+            <div className="toggle-switch">
+              <input
+                type="checkbox"
+                checked={settings.autoSave}
+                onChange={(e) => handleSettingChange('autoSave', e.target.checked)}
+              />
+              <span className="slider"></span>
+            </div>
+          </div>
+          <div className="account-actions">
+            <button className="export-btn" onClick={handleExportData}>
+              <FiDownload /> Export Data
+            </button>
+            <button className="delete-btn">Delete Account</button>
+          </div>
+        </div>
+      </div>
+
+      <div className="settings-footer">
+        <button className="save-btn">Save Changes</button>
+        <button className="reset-btn">Reset to Default</button>
+      </div>
+    </div>
+  );
+};
+
+export default Settings;

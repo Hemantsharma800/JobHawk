@@ -1,0 +1,9 @@
+{
+  "extends": ["react-app"],
+  "rules": {
+    "import/first": "off",
+    "no-undef": "off",
+    "no-restricted-globals": "off",
+    "no-unused-vars": "warn"
+  }
+}

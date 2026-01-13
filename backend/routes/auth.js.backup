@@ -1,0 +1,132 @@
+const express = require('express');
+const router = express.Router();
+const { body, validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+// Test route - make sure auth is working
+router.get('/test', (req, res) => {
+    res.json({ 
+        success: true, 
+        message: 'Auth routes are working!',
+        timestamp: new Date().toISOString()
+    });
+});
+
+// Register route
+router.post('/register', [
+    body('name', 'Name is required').notEmpty(),
+    body('email', 'Enter a valid email').isEmail(),
+    body('password', 'Password must be at least 5 characters').isLength({ min: 5 })
+], async (req, res) => {
+    // Validate request
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+        const { name, email, password } = req.body;
+        
+        // For now, just return success without database
+        // In real app, you would save to database here
+        
+        // Create a demo JWT token
+        const token = jwt.sign(
+            { userId: 'demo-id', email: email },
+            'your_jwt_secret',
+            { expiresIn: '7d' }
+        );
+        
+        res.status(201).json({
+            success: true,
+            message: 'User registered successfully',
+            user: {
+                id: 'demo-user-id',
+                name: name,
+                email: email
+            },
+            token: token
+        });
+    } catch (error) {
+        console.error('Registration error:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Server error during registration' 
+        });
+    }
+});
+
+// Login route
+router.post('/login', [
+    body('email', 'Enter a valid email').isEmail(),
+    body('password', 'Password is required').exists()
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { email, password } = req.body;
+    
+    // Demo login - in real app, check database
+    const demoToken = jwt.sign(
+        { userId: 'demo-login-id', email: email },
+        'your_jwt_secret',
+        { expiresIn: '7d' }
+    );
+    
+    res.json({
+        success: true,
+        message: 'Login successful',
+        token: demoToken,
+        user: {
+            id: 'demo-user-id',
+            name: 'Demo User',
+            email: email
+        }
+    });
+});
+
+module.exports = router;
+// Add this after line 1 (or find the register route response)
+
+// In the register route response, add role:
+res.status(201).json({
+    success: true,
+    message: 'User registered successfully',
+    user: {
+        id: 'demo-user-id',
+        name: name,
+        email: email,
+        role: 'user'  // ← ADD THIS LINE
+    },
+    token: token
+});
+
+// In the login route response, also add role:
+res.json({
+    success: true,
+    message: 'Login successful',
+    token: demoToken,
+    user: {
+        id: 'demo-user-id',
+        name: 'Demo User',
+        email: email,
+        role: 'user'  // ← ADD THIS LINE
+    }
+});
+
+// Simple login for testing (add before module.exports)
+router.post('/demo-login', (req, res) => {
+    res.json({
+        success: true,
+        token: 'demo-jwt-token-123',
+        user: {
+            id: '1',
+            name: 'Demo User',
+            email: 'demo@example.com',
+            role: 'user'
+        }
+    });
+});
